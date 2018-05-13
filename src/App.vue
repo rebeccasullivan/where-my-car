@@ -6,35 +6,37 @@
 </template>
 
 <script>
-// import firebase from 'firebase'
+import firebase from 'firebase'
 import locationRef from '../firebase-config.js'
 
 export default {
   name: 'app',
   firebase: {
-    locationRef
-  },
-  created () {
-
+    loc: locationRef
   },
   data () {
-
+    return {
+      leftCoord: '',
+      topCoord: ''
+    }
   },
   methods: {
     saveLocation: function (location) {
-      const offset = 5
-
       const coordinates = {
         leftCoord: location.layerX,
         topCoord: location.layerY
       }
-      const marker = document.getElementById('marker')
-      marker.style.left = `${coordinates.leftCoord - offset}px`
-      marker.style.top = `${coordinates.topCoord - offset}px`
-
-      locationRef.set(coordinates)
+      console.log(coordinates)
+      // this.loc.set(coordinates)
+      return coordinates
+    },
+    setMarker: function () {
+      marker = document.getElementById('marker')
+      marker.style.left = this.leftCoord
+      marker.style.top = this.topCoord
     }
   }
+
 }
 </script>
 
@@ -48,7 +50,7 @@ export default {
   margin-top: 60px;
 }
 #marker {
-  color: red;
+  color: pink;
   position: absolute;
 }
 img {

@@ -1,13 +1,12 @@
 import firebase from 'firebase'
 
-// Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyDDA0WXyQ6BiN9K36Eswc-TSY387lPUkS4',
-  authDomain: 'where-my-car-app.firebaseapp.com',
-  databaseURL: 'https://where-my-car-app.firebaseio.com',
-  projectId: 'where-my-car-app',
-  storageBucket: '',
-  messagingSenderId: '175319837102'
+  apiKey: "AIzaSyDeET-CS0Pci3KI7KGYmzNfLsGWrgb7Cbc",
+  authDomain: "where-my-car-f434e.firebaseapp.com",
+  databaseURL: "https://where-my-car-f434e.firebaseio.com",
+  projectId: "where-my-car-f434e",
+  storageBucket: "where-my-car-f434e.appspot.com",
+  messagingSenderId: "528344319027"
 };
 const app = firebase.initializeApp(config);
 
