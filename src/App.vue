@@ -61,7 +61,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 #marker {
   font-size: 70px;
@@ -69,6 +68,6 @@ export default {
   position: absolute;
 }
 img {
-  width: 100%;
+  width: 238%;
 }
 </style>
