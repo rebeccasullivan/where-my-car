@@ -43,8 +43,8 @@ export default {
   methods: {
     saveCoordinates: function (clickEvent) {
       const coordinates = {
-        leftCoord: clickEvent.layerX,
-        topCoord: clickEvent.layerY
+        leftCoord: clickEvent.layerX - 22,
+        topCoord: clickEvent.layerY - 30
       }
       this.leftCoord = coordinates.leftCoord
       this.topCoord = coordinates.topCoord
@@ -64,6 +64,7 @@ export default {
   margin-top: 60px;
 }
 #marker {
+  font-size: 70px;
   color: pink;
   position: absolute;
 }
