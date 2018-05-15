@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <span id="marker" class="fas fa-times"
+    <span id="marker" class="fas fa-hand-point-right"
       :style="{ left: leftCoord + 'px', top: topCoord + 'px' }">
     </span>
     <img @click="saveCoordinates($event)" src="./assets/parking-lot.jpg">
@@ -43,8 +43,8 @@ export default {
   methods: {
     saveCoordinates: function (clickEvent) {
       const coordinates = {
-        leftCoord: clickEvent.layerX - 22,
-        topCoord: clickEvent.layerY - 30
+        leftCoord: clickEvent.layerX - 68,
+        topCoord: clickEvent.layerY - 26
       }
       this.leftCoord = coordinates.leftCoord
       this.topCoord = coordinates.topCoord
@@ -65,7 +65,7 @@ export default {
 }
 #marker {
   font-size: 70px;
-  color: pink;
+  color: #00ffff;
   position: absolute;
 }
 img {
