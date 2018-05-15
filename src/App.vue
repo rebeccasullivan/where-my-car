@@ -2,10 +2,10 @@
   <div id="app">
     <span v-if="isLoading" id="marker" class="fas fa-times"></span>
     <ul>
-      <li>{{ loc[0] }}</li>
-      <li>{{ loc[1] }}</li>
+      <li>{{ location[0] }}</li>
+      <li>{{ location[1] }}</li>
     </ul>
-    <img @click="saveLocation($event)" src="./assets/parking-lot.jpg">
+    <img @click="saveCoordinates($event)" src="./assets/parking-lot.jpg">
   </div>
 </template>
 
@@ -28,7 +28,7 @@ const locationRef = db.ref('location')
 export default {
   name: 'app',
   firebase: {
-    loc: locationRef
+    location: locationRef
   },
   mounted () {
     this.isLoading = true
@@ -41,25 +41,23 @@ export default {
     }
   },
   methods: {
-    saveLocation: function (location) {
-      const coordinates = {
-        leftCoord: location.layerX,
-        topCoord: location.layerY
-      }
+    updateMarker: function () {
+      const left = this.location.leftCoordinate
+      const top = this.location.topCoordinate
       const marker = document.getElementById('marker')
-      marker.style.left = coordinates.leftCoord
-      marker.style.top = coordinates.topCoord
-      console.log(marker.style.left)
+      marker.style.left = left
+      marker.style.top = top
+      // console.log(marker.style.left)
       // console.log(coordinates)
       // console.log(marker)
       // this.loc.set(coordinates)
-      return coordinates
     },
-    getMarkerCoordinates: function () {
-      const marker = document.getElementById('marker')
-      marker.style.left = this.leftCoord
-      marker.style.top = this.topCoord
-      // console.log(marker)
+    saveCoordinates: function (clickEvent) {
+      const coordinates = {
+        leftCoordinate: clickEvent.layerX,
+        topCoordinate: clickEvent.layerY
+      }
+      this.location.set(coordinates)
     }
   }
 
