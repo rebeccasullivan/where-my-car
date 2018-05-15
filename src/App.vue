@@ -1,18 +1,38 @@
 <template>
   <div id="app">
-    <span id="marker" class="fas fa-times"></span>
-    <img @click="saveLocation($event)" src="./assets/parking-lot.jpg">
+    <span id="marker" class="fas fa-hand-point-right"
+      :style="{ left: leftCoord + 'px', top: topCoord + 'px' }">
+    </span>
+    <img @click="saveCoordinates($event)" src="./assets/parking-lot.jpg">
   </div>
 </template>
 
 <script>
 import firebase from 'firebase'
-import locationRef from '../firebase-config.js'
+
+const config = {
+  apiKey: 'AIzaSyDeET-CS0Pci3KI7KGYmzNfLsGWrgb7Cbc',
+  authDomain: 'where-my-car-f434e.firebaseapp.com',
+  databaseURL: 'https://where-my-car-f434e.firebaseio.com',
+  projectId: 'where-my-car-f434e',
+  storageBucket: 'where-my-car-f434e.appspot.com',
+  messagingSenderId: '528344319027'
+}
+
+const db = firebase.initializeApp(config).database()
+const locationRef = db.ref('location')
 
 export default {
   name: 'app',
   firebase: {
-    loc: locationRef
+    location: {
+      source: locationRef,
+      asObject: true,
+      readyCallback: function () {
+        this.leftCoord = this.location.leftCoord
+        this.topCoord = this.location.topCoord
+      }
+    }
   },
   data () {
     return {
@@ -21,22 +41,16 @@ export default {
     }
   },
   methods: {
-    saveLocation: function (location) {
+    saveCoordinates: function (clickEvent) {
       const coordinates = {
-        leftCoord: location.layerX,
-        topCoord: location.layerY
+        leftCoord: clickEvent.layerX - 68,
+        topCoord: clickEvent.layerY - 26
       }
-      console.log(coordinates)
-      // this.loc.set(coordinates)
-      return coordinates
-    },
-    setMarker: function () {
-      marker = document.getElementById('marker')
-      marker.style.left = this.leftCoord
-      marker.style.top = this.topCoord
+      this.leftCoord = coordinates.leftCoord
+      this.topCoord = coordinates.topCoord
+      locationRef.set(coordinates)
     }
   }
-
 }
 </script>
 
@@ -47,13 +61,13 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 #marker {
-  color: pink;
+  font-size: 70px;
+  color: #00ffff;
   position: absolute;
 }
 img {
-  width: 100%;
+  width: 238%;
 }
 </style>
